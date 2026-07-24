@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Query Performance Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>SQL Query Performance Classification</h1>
+
+    <form action="/predict" method="POST">
+
+        <label>Query Length</label>
+        <input type="number" name="Query_Length" required>
+
+        <label>Number of Joins</label>
+        <input type="number" name="Number_of_Joins" required>
+
+        <label>Number of WHERE Clauses</label>
+        <input type="number" name="Number_of_Where" required>
+
+        <label>Number of Subqueries</label>
+        <input type="number" name="Number_of_Subqueries" required>
+
+        <label>GROUP BY Used</label>
+        <select name="Has_GroupBy">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+
+        <label>ORDER BY Used</label>
+        <select name="Has_OrderBy">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+
+        <label>Index Used</label>
+        <select name="Has_Index">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+
+        <label>Table Size</label>
+        <select name="Table_Size">
+            <option value="0">Small</option>
+            <option value="1">Medium</option>
+            <option value="2">Large</option>
+        </select>
+
+        <label>Estimated Rows</label>
+        <input type="number" name="Estimated_Rows" required>
+
+        <label>Execution Memory (MB)</label>
+        <input type="number" name="Execution_Memory_MB" required>
+
+        <button type="submit">Predict Performance</button>
+
+    </form>
+
+    {% if prediction %}
+        <div class="result">
+            Prediction : <strong>{{ prediction }}</strong>
+        </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
